@@ -9,8 +9,19 @@ function TableHeader(){
         </thead>
     );
 }
+function Table(props) {
+    return (
+        <table>
+            <TableHeader/>
+            <TableBody
+                characterData={props.characterData}
+                removeCharacter={props.removeCharacter}
+            />
+        </table>
+    );
+}
 function TableBody(props){
-    const rows = props.characterData.map((row, index) => {
+    const rows = (props.characterData || []).map((row, index) => {
             return (
                 <tr key={index}>
                     <td>{row.name}</td>
@@ -31,15 +42,4 @@ function TableBody(props){
     );
 }
 
-function Table(props) {
-    return (
-        <table>
-            <TableHeader/>
-            <TableBody
-            characterData={props.characterData}
-            removeCharacter={props.removeCharacter}
-        />
-    </table>
-);
-}
 export default Table;

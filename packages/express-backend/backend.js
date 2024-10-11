@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 
 const app = express();
 const port = 8000;
@@ -63,7 +64,7 @@ const removeUserById = (id) =>{
     }
 };
 
-
+app.use(cors());
 app.use(express.json());
 
 app.post("/users", (req, res) => {
