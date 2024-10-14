@@ -50,8 +50,13 @@ const findUsersByNameAndJob = (name, job) => {
     );
 };
 
+const generateID = () =>{
+    return Math.random().toString(36).substr(2,9);
 
+}
 const addUser = (user) => {
+    user.id = generateID();
+    console.log("Added User ID:", user.id)
     users["users_list"].push(user);
     return user;
 };
@@ -70,7 +75,7 @@ app.use(express.json());
 app.post("/users", (req, res) => {
     const userToAdd = req.body;
     addUser(userToAdd);
-    res.send();
+    res.status(201).json(userToAdd);
 });
 
 app.get("/users", (req, res) => {
