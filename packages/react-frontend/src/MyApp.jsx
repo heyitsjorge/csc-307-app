@@ -23,10 +23,25 @@ function MyApp() {
     }
 
     function removeOneCharacter(index) {
-        const updated = characters.filter((character, i) => {
-            return i !== index;
-        });
-        setCharacters(updated);
+        const characterToDelete = characters[index];
+        deleteCharInBackEnd(characterToDelete.id).then((res) => {
+            if (res.status == 204){
+                const updated = characters.filter((character, i) => i !== index);
+                setCharacters(updated);
+            }
+            else{
+                    throw new Error("Did Not Delete Character in the Backend")
+                }
+        })
+            .catch((error)=> {
+                console.log(error)
+            });
+        }
+
+
+    function deleteCharInBackEnd(id){
+        return fetch(`http://localhost:8000/users/${id}`, {method: 'DELETE',
+            });
     }
 
     return (
