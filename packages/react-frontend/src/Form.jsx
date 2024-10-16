@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-function Form() {
+function Form(props) {
     const [person, setPerson] = useState({
-        name: "",
-        job: ""
+        name:"",
+        job:""
     });
 
     function handleChange(event) {
@@ -12,9 +12,13 @@ function Form() {
             setPerson({name: person["name"], job: value});
         else setPerson({name: value, job: person["job"]});
     }
-
+    function submitForm(event) {
+        event.preventDefault();
+        props.handleSubmit(person);
+        setPerson({name: "", job: ""});
+    }
     return (
-        <form>
+        <form onSubmit={submitForm}>
             <label htmlFor="name">Name</label>
             <input
                 type="text"
@@ -31,15 +35,9 @@ function Form() {
                 value={person.job}
                 onChange={handleChange}
             />
+            <input type="button" value="Submit" onClick={submitForm}/>
         </form>
     );
-
-    function submitForm(props) {
-        props.handleSubmit(person);
-        setPerson({name: "", job: ""});
-    }
-
-    <input type="button" value="Submit" onClick={submitForm}/>
 }
 
 export default Form;
