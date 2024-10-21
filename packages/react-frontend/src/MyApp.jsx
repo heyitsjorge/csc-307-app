@@ -24,7 +24,7 @@ function MyApp() {
 
     function removeOneCharacter(index) {
         const characterToDelete = characters[index];
-        deleteCharInBackEnd(characterToDelete.id).then((res) => {
+        deleteCharInBackEnd(characterToDelete._id).then((res) => {
             if (res.status == 204){
                 const updated = characters.filter((character, i) => i !== index);
                 setCharacters(updated);
@@ -39,8 +39,8 @@ function MyApp() {
         }
 
 
-    function deleteCharInBackEnd(id){
-        return fetch(`http://localhost:8000/users/${id}`, {method: 'DELETE',
+    function deleteCharInBackEnd(_id){
+        return fetch(`http://localhost:8000/users/${_id}`, {method: 'DELETE',
             });
     }
 
